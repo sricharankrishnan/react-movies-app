@@ -1,0 +1,21 @@
+.appHeaderBar {
+  background: #000;
+  padding: 15px;
+}
+
+.app-logo {
+   animation: app-logo-spin infinite 8s linear;
+   height: 35px;
+}
+
+.login-button {
+    float: right;
+}
+
+@keyframes app-logo-spin {
+   from { transform: scaleX(-1); }
+}
+
+.app-logo {
+  width: 30px;
+}
