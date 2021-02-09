@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 
 /* material ui import */
 import {Button} from "@material-ui/core";
@@ -16,7 +17,7 @@ import logo from "../../assets/logo.svg";
 
 const TabContainer = (props) => {
   return (
-    <Typography component="div" style={{padding: "0"}}>
+    <Typography component="div" style={{padding: "0", textAlign: "center"}}>
       {props.children}
     </Typography>
   );
@@ -55,6 +56,10 @@ class Header extends Component {
 			}
 		};
 
+    const appTabStyle = {
+      marginBottom: "25px"
+    };
+
     return (
       <React.Fragment>
         <div className="appHeaderBar row">
@@ -65,20 +70,23 @@ class Header extends Component {
             </Button>
           </div>
         </div>
-        <Modal style={appLoginModalCustomStyles} lassName="appLoginModal" ariaHideApp={false} isOpen={this.state.modalIsOpen} contentLabel="login" onRequestClose={this.closeModalHandler.bind(this)}>
-          <Tabs value={this.state.value} onChange={this.tabChangeHandler.bind(this)}>
+        <Modal style={appLoginModalCustomStyles} ariaHideApp={false} isOpen={this.state.modalIsOpen} contentLabel="login" onRequestClose={this.closeModalHandler.bind(this)}>
+          <Tabs style={appTabStyle} value={this.state.value} onChange={this.tabChangeHandler.bind(this)}>
             <Tab label="Login User"/>
             <Tab label="Register User"/>
           </Tabs>
           <TabContainer>
-            <FormControl required>
+            <FormControl required centered>
               <InputLabel htmlFor="userName">Username</InputLabel>
               <Input id="username" type="text"/>
             </FormControl>
-            <FormControl required>
+            <br/>
+            <FormControl required centered>
               <InputLabel htmlFor="password">Password</InputLabel>
               <Input id="password" type="password"/>
             </FormControl>
+            <br/><br/>
+            <Button variant="contained" color="primary">Login</Button>
           </TabContainer>
         </Modal>
       </React.Fragment>
