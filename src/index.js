@@ -6,6 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import "./common/css/common.css";
 import Home from "./screens/home/Home.js";
 
+/***** typography imports *****/
+import 'fontsource-roboto';
+
 ReactDOM.render(
   <React.StrictMode>
     <Home/>
