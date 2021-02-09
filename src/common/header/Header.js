@@ -8,6 +8,7 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
 
 /* material ui import */
 import {Button} from "@material-ui/core";
@@ -21,6 +22,9 @@ const TabContainer = (props) => {
       {props.children}
     </Typography>
   );
+};
+TabContainer.propTypes = {
+  children: PropTypes.node.isRequired 
 };
 
 class Header extends Component {
@@ -75,19 +79,22 @@ class Header extends Component {
             <Tab label="Login User"/>
             <Tab label="Register User"/>
           </Tabs>
-          <TabContainer>
-            <FormControl required centered>
-              <InputLabel htmlFor="userName">Username</InputLabel>
-              <Input id="username" type="text"/>
-            </FormControl>
-            <br/>
-            <FormControl required centered>
-              <InputLabel htmlFor="password">Password</InputLabel>
-              <Input id="password" type="password"/>
-            </FormControl>
-            <br/><br/>
-            <Button variant="contained" color="primary">Login</Button>
-          </TabContainer>
+          {
+            (this.state.value === 0) &&
+            <TabContainer>
+              <FormControl required centered>
+                <InputLabel htmlFor="userName">Username</InputLabel>
+                <Input id="username" type="text"/>
+              </FormControl>
+              <br/>
+              <FormControl required centered>
+                <InputLabel htmlFor="password">Password</InputLabel>
+                <Input id="password" type="password"/>
+              </FormControl>
+              <br/><br/>
+              <Button variant="contained" color="primary">Login</Button>
+            </TabContainer>
+          }
         </Modal>
       </React.Fragment>
     );
