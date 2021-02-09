@@ -9,6 +9,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
+import FormHelpertext from "@material-ui/core/FormHelperText";
 
 /* material ui import */
 import {Button} from "@material-ui/core";
@@ -32,7 +33,10 @@ class Header extends Component {
     super();
     this.state = {
       modalIsOpen: false,
-      value: 0
+      value: 0,
+      usernameRequired: "dispNone",
+      username: "",
+      password: ""
     };
   };
 
@@ -46,6 +50,19 @@ class Header extends Component {
 
   tabChangeHandler(event, toShowTabIndex) {
     this.setState({value: toShowTabIndex});
+  };
+
+  loginClickHandler(event) {
+    let {username} = this.state;
+    (username === "") ? this.setState({usernameRequired: "dispBlock"}) : this.setState({usernameRequired: "dispNone"});
+  };
+
+  inputChangeHandler(event) {
+    let name = event.target.name;
+    let value = event.target.value;
+    let updatedState = {};
+    updatedState[name] = value;
+    this.setState(updatedState);
   };
 
   render() {
@@ -82,17 +99,19 @@ class Header extends Component {
           {
             (this.state.value === 0) &&
             <TabContainer>
-              <FormControl required centered>
+              <FormControl required centered="true">
                 <InputLabel htmlFor="userName">Username</InputLabel>
-                <Input id="username" type="text"/>
+                <Input name="username" id="username" type="text" username={this.state.username} onChange={this.inputChangeHandler.bind(this)}/>
+                <FormHelpertext className={this.state.usernameRequired}><span className="red">Required</span></FormHelpertext>
               </FormControl>
               <br/>
-              <FormControl required centered>
+              <FormControl required centered="true">
                 <InputLabel htmlFor="password">Password</InputLabel>
-                <Input id="password" type="password"/>
+                <Input name="password" id="password" type="password" onChange={this.inputChangeHandler.bind(this)}/>
+                <FormHelpertext>Required</FormHelpertext>
               </FormControl>
               <br/><br/>
-              <Button variant="contained" color="primary">Login</Button>
+              <Button variant="contained" color="primary" onClick={this.loginClickHandler.bind(this)}>Login</Button>
             </TabContainer>
           }
         </Modal>
