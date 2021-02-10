@@ -1,9 +1,12 @@
 /* react imports */
 import React, {Component} from "react";
+import ReactDOM from "react-dom";
+import YouTube from "react-youtube";
 
 /* project imports */
 import "./Details.css";
 import Header from "../../common/header/Header.js";
+import Home from "../home/Home.js";
 import moviesData from '../../assets/movieData';
 
 /* material ui imports */
@@ -43,14 +46,39 @@ class Details extends Component {
     return dateString;
   };
 
+  backToHomeHandler() {
+    ReactDOM.render(
+      <Home/>,
+      document.getElementById("root")
+    );
+  };
+
+  _onReady() {
+    console.log("youtube on ready fired");
+  };
+
   render() {
     let {movie} = this.state;
     let formattedReleaseDate = this.formatDate(movie.release_date);
+    let opts = {
+      height: "300",
+      width: "700",
+      playerVars: {
+        autoplay: 1
+      }
+    };
 
     return (
       <React.Fragment>
         <div className="details">
           <Header/>
+
+          {/* back button */}
+          <div className="back">
+            <Typography onClick={this.backToHomeHandler.bind(this)}>
+              &#60; Back To Home
+            </Typography>
+          </div>
 
 					{/* flex container */}
 					<div className="flex-containerDetails">
@@ -77,6 +105,17 @@ class Details extends Component {
                 <Typography>
                   <span className="bold">Plot: </span> <a href={movie.wiki_url}>Wiki Link</a> {movie.storyline}
                 </Typography>
+
+                {/* displaying trailer */}
+                <div className="trailerContainer marginTop16">
+                  <Typography>
+                    <span className="bold">Trailer:</span>
+                  </Typography>
+                  <YouTube videoId={movie.trailer_url.split("?v=")[1]}
+                    opts={opts}
+                    onReady={this._onReady.bind(this)}
+                  />
+                </div>
               </div>
 						</div>
 						<div className="rightDetails">
