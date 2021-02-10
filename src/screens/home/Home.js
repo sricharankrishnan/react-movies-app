@@ -6,6 +6,7 @@ import Header from "../../common/header/Header.js";
 import "./Home.css";
 import moviesData from '../../assets/movieData';
 import genres from "../../assets/genres";
+import artists from "../../assets/artists";
 
 /* material ui imports */
 import { withStyles } from '@material-ui/core/styles';
@@ -73,7 +74,8 @@ class Home extends Component {
     super();
     this.state = {
       movieName: "",
-      genres: []
+      genres: [],
+      artists: []
     };
   };
 
@@ -83,6 +85,10 @@ class Home extends Component {
 
   genreSelectHandler(event) {
     this.setState({genres: event.target.value});
+  };
+  
+  artistSelectHandler(event) {
+    this.setState({artists: event.target.value});
   };
 
   render() {
@@ -149,6 +155,24 @@ class Home extends Component {
                           <MenuItem key={genre.id} value={genre.name}>
                             <Checkbox checked={this.state.genres.indexOf(genre.name) > -1}/>
                             <ListItemText primary={genre.name}/>
+                          </MenuItem>
+                        );
+                      })
+                    }
+                  </Select>
+                </FormControl>
+                <FormControl className={classes.formControl}>
+                  <InputLabel htmlFor="select-multiple-checkbox-artist">Movie Artist</InputLabel>
+                  <Select multiple input={<Input id="select-multiple-checkbox-artist"/>}
+                  renderValue={selected => selected.join(", ")} value={this.state.artists} onChange={this.artistSelectHandler.bind(this)}>
+                    <MenuItem value="0">None</MenuItem>
+                    {
+                      artists.map((artist, index) => {
+                        let artistFullName = artist.first_name + " " + artist.last_name;
+                        return (
+                          <MenuItem key={artist.id} value={artistFullName}>
+                            <Checkbox checked={this.state.artists.indexOf(artistFullName) > -1}/>
+                            <ListItemText primary={artistFullName}/>
                           </MenuItem>
                         );
                       })
