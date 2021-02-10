@@ -1,6 +1,10 @@
+/* react imports */
 import React, {Component} from "react";
-import "./Header.css";
 import Modal from "react-modal";
+import PropTypes from "prop-types";
+
+/* material ui import */
+import {Button} from "@material-ui/core";
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
@@ -8,14 +12,11 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
-import PropTypes from "prop-types";
 import FormHelpertext from "@material-ui/core/FormHelperText";
-
-/* material ui import */
-import {Button} from "@material-ui/core";
 
 /* project imports */
 import logo from "../../assets/logo.svg";
+import "./Header.css";
 
 const TabContainer = (props) => {
   return (

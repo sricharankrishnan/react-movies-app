@@ -24,6 +24,7 @@ import Checkbox  from '@material-ui/core/Checkbox';
 import ListItemText  from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+import {Button} from "@material-ui/core";
 
 const styles = theme => ({
   root: {
@@ -62,8 +63,7 @@ const styles = theme => ({
   },
   formControl: {
      margin: theme.spacing.unit,
-     minWidth: 240,
-     maxWidth: 240
+     width: "100%"
   },
   title: {
      color: theme.palette.primary.light,
@@ -143,10 +143,12 @@ class Home extends Component {
                     FIND MOVIES BY:
                   </Typography>
                 </FormControl>
+                <br/>
                 <FormControl className={classes.formControl}>
                   <InputLabel htmlFor="movieName">Movie Name</InputLabel>
                   <Input name="movieName" id="movieName" onChange={this.movieNameChangeHandler.bind(this)}/>
                 </FormControl>
+                <br/>
                 <FormControl className={classes.formControl}>
                   <InputLabel htmlFor="select-multiple-checkbox">Movie Genre</InputLabel>
                   <Select multiple input={<Input id="select-multiple-checkbox"/>}
@@ -164,6 +166,7 @@ class Home extends Component {
                     }
                   </Select>
                 </FormControl>
+                <br/>
                 <FormControl className={classes.formControl}>
                   <InputLabel htmlFor="select-multiple-checkbox-artist">Movie Artist</InputLabel>
                   <Select multiple input={<Input id="select-multiple-checkbox-artist"/>}
@@ -182,6 +185,8 @@ class Home extends Component {
                     }
                   </Select>
                 </FormControl>
+                <br/>
+                <br/>
                 <FormControl className={classes.formControl}>
                   <TextField
                   id="releaseDateStart"
@@ -191,6 +196,22 @@ class Home extends Component {
                   InputLabelProps={{ shrink: true }}
                   />
                 </FormControl>
+                <br/>
+                <br/>
+                <FormControl fullWidth="true" className={classes.formControl}>
+                  <TextField
+                  id="releaseDateEnd"
+                  label="Release Date End"
+                  type="date"
+                  defaultValue=""
+                  InputLabelProps={{ shrink: true }}
+                  />
+                </FormControl>
+                <br/>
+                <br/>
+                <Button fullWidth="true" variant="contained" color="primary">
+                  Apply
+                </Button>
               </CardContent>
             </Card>
           </div>
