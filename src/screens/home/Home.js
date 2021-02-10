@@ -1,5 +1,6 @@
 /* react imports */
 import React, {Component} from "react";
+import ReactDOM from "react-dom";
 
 /* project imports */
 import Header from "../../common/header/Header.js";
@@ -7,6 +8,7 @@ import "./Home.css";
 import moviesData from '../../assets/movieData';
 import genres from "../../assets/genres";
 import artists from "../../assets/artists";
+import Details from "../details/Details.js"; 
 
 /* material ui imports */
 import { withStyles } from '@material-ui/core/styles';
@@ -94,6 +96,14 @@ class Home extends Component {
     });
   };
 
+  movieClickHandler(movieId) {
+    console.log("Movie Id: ", movieId);
+    ReactDOM.render(
+      <Details movieId={movieId}/>,
+      document.getElementById("root")
+    );
+  };
+
   render() {
     const {classes} = this.props;
     return (
@@ -125,7 +135,7 @@ class Home extends Component {
               {
                 moviesData.map((movie, index) => {
                   return (
-                    <GridListTile key={movie.id}>
+                    <GridListTile onClick={this.movieClickHandler.bind(this, movie.id)} key={movie.id}>
                       <img className={classes.gridReleasedImage} src={movie.poster_url} title={movie.title} alt={movie.title}/>
                       <GridListTileBar title={movie.title}
                       subtitle={<span>Release Date: {new Date(movie.release_date).toDateString()}</span>}/>
