@@ -5,6 +5,7 @@ import ReactDOM from "react-dom";
 /* project imports */
 import "./BookShow.css";
 import Header from "../../common/header/Header.js";
+import Summary from "../summary/Summary";
 import Home from "../home/Home.js";
 import language from '../../assets/language';
 import location from '../../assets/location';
@@ -85,13 +86,18 @@ class BookShow extends Component {
   };
 
   bookShowButtonHandler(event) {
-    let {location, language, showDate, showTime, tickets} = this.state;
+    let {location, language, showDate, showTime, tickets, unitPrice} = this.state;
 
     (location === "") ? this.setState({locationRequired: "dispBlock"}) : this.setState({locationRequired: "dispNone"});
     (language === "") ? this.setState({languageRequired: "dispBlock"}) : this.setState({languageRequired: "dispNone"}); 
     (showDate === "") ? this.setState({showDateRequired: "dispBlock"}) : this.setState({showDateRequired: "dispNone"}); 
     (showTime === "") ? this.setState({showTimeRequired: "dispBlock"}) : this.setState({showTimeRequired: "dispNone"}); 
     (tickets === 0) ? this.setState({ticketsRequired: "dispBlock"}) : this.setState({ticketsRequired: "dispNone"}); 
+
+    if (location !== "" && language !== "" && showDate !== "" && showTime !== "" && tickets > 0) {
+      let bookingData = {location, language, showDate, showTime, tickets, unitPrice};
+      ReactDOM.render(<Summary bookingData={bookingData}/>, document.getElementById("root"));
+    }
   };
 
   render() {
