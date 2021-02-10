@@ -11,6 +11,12 @@ import { withStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Input from '@material-ui/core/Input';
+import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
   root: {
@@ -32,10 +38,43 @@ const styles = theme => ({
   gridPosterImage: {
     height: "100%",
     display: "block"
+  },
+  gridReleasedImage: {
+    width: "auto",
+    height: "100%",
+    display: "block",
+    marginLeft: "auto",
+    marginRight: "auto"
+  },
+  gridListReleasedMovies: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    marginTop: "25px !important",
+  },
+  formControl: {
+     margin: theme.spacing.unit,
+     minWidth: 240,
+     maxWidth: 240
+  },
+  title: {
+     color: theme.palette.primary.light,
   }
 });
 
 class Home extends Component {
+  constructor() {
+    super();
+    this.state = {
+      movieName: ""
+    };
+  };
+
+  movieNameChangeHandler(event) {
+    this.setState({movieName: event.target.value});
+  }
+
   render() {
     const {classes} = this.props;
     return (
@@ -44,6 +83,8 @@ class Home extends Component {
         <div className={classes.upcomingMoviesHeading}>
           <span>Upcoming Movies</span>
         </div>
+
+        {/* upcoming movies */}
         <GridList className={classes.gridListUpcomingMovies} cols={4.5}>
           {
             moviesData.map((movie, index) => {
@@ -56,6 +97,41 @@ class Home extends Component {
             })
           }
         </GridList>
+
+        {/* flex container body section */}
+        <div className="flex-container">
+          <div className="left">
+            {/* released movies */}
+            <GridList cellHeight={350} cols={3} className={classes.gridListReleasedMovies}>
+              {
+                moviesData.map((movie, index) => {
+                  return (
+                    <GridListTile key={movie.id}>
+                      <img className={classes.gridReleasedImage} src={movie.poster_url} title={movie.title} alt={movie.title}/>
+                      <GridListTileBar title={movie.title}
+                      subtitle={<span>Release Date: {new Date(movie.release_date).toDateString()}</span>}/>
+                    </GridListTile>
+                  );
+                })
+              }
+            </GridList>
+          </div>
+          <div className="right">
+            <Card>
+              <CardContent>
+                <FormControl className={classes.formControl}>
+                  <Typography className={classes.title} color="textSecondary">
+                    FIND MOVIES BY:
+                  </Typography>
+                </FormControl>
+                <FormControl className={classes.formControl}>
+                  <InputLabel htmlFor="movieName">Movie Name</InputLabel>
+                  <Input name="movieName" id="movieName" onChange={this.movieNameChangeHandler.bind(this)}/>
+                </FormControl>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       </React.Fragment>
     );
   };
