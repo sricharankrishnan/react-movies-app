@@ -11,6 +11,9 @@ import moviesData from '../../assets/movieData';
 
 /* material ui imports */
 import Typography from '@material-ui/core/Typography';
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
+import GridListTileBar from '@material-ui/core/GridListTileBar';
 
 class Details extends Component {
 	constructor() {	
@@ -119,11 +122,24 @@ class Details extends Component {
               </div>
 						</div>
 						<div className="rightDetails">
-							Right Details
+              <GridList>
+                {
+                  movie.artists.map(function(artist) {
+                    let artistFullName = artist.first_name + " " + artist.last_name;
+                    return (
+                      <GridListTile key={artist.id}>
+                        <img src={artist.profile_url} alt={artistFullName} />
+                        <GridListTileBar
+                          title={artistFullName}
+                        />
+                      </GridListTile>
+                    );
+                  })
+                }
+              </GridList>
 						</div>	
 					</div>
 					{/* flex container */}
-
         </div>
       </React.Fragment>
     );
