@@ -23,6 +23,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Checkbox  from '@material-ui/core/Checkbox';
 import ListItemText  from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
   root: {
@@ -88,7 +89,9 @@ class Home extends Component {
   };
   
   artistSelectHandler(event) {
-    this.setState({artists: event.target.value});
+    this.setState({artists: event.target.value}, function() {
+      console.log(this.state);
+    });
   };
 
   render() {
@@ -178,6 +181,15 @@ class Home extends Component {
                       })
                     }
                   </Select>
+                </FormControl>
+                <FormControl className={classes.formControl}>
+                  <TextField
+                  id="releaseDateStart"
+                  label="Release Date Start"
+                  type="date"
+                  defaultValue=""
+                  InputLabelProps={{ shrink: true }}
+                  />
                 </FormControl>
               </CardContent>
             </Card>
