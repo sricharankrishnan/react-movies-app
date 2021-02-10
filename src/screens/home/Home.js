@@ -13,22 +13,26 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 
 const styles = theme => ({
-   root: {
-       flexGrow: 1,
-       backgroundColor: theme.palette.background.paper
-   },
-   upcomingMoviesHeading: {
-       textAlign: 'center',
-       background: '#ff9999',
-       padding: '8px',
-       fontSize: '1rem',
-       fontFamily: "monospace"
-   },
-   gridListUpcomingMovies: {
-       flexWrap: 'nowrap',
-       transform: 'translateZ(0)',
-       width: '100%'
-   }
+  root: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.paper
+  },
+  upcomingMoviesHeading: {
+    textAlign: 'center',
+    background: '#ff9999',
+    padding: '8px',
+    fontSize: '1rem',
+    fontFamily: "monospace"
+  },
+  gridListUpcomingMovies: {
+    flexWrap: 'nowrap',
+    transform: 'translateZ(0)',
+    width: '100%'
+  },
+  gridPosterImage: {
+    height: "100%",
+    display: "block"
+  }
 });
 
 class Home extends Component {
@@ -45,7 +49,7 @@ class Home extends Component {
             moviesData.map((movie, index) => {
               return (
                 <GridListTile key={movie.id}>
-                  <img src={movie.poster_url} title={movie.title} alt={movie.title}/>
+                  <img className={classes.gridPosterImage} src={movie.poster_url} title={movie.title} alt={movie.title}/>
                   <GridListTileBar title={movie.title}/>
                 </GridListTile>
               );
