@@ -56,9 +56,7 @@ class Details extends Component {
 			return mov.id === this.props.movieId
 		})[0];
 
-		this.setState({ currentState }, function() {		
-			console.log(this.state);
-		});
+		this.setState({ currentState });
 	};
 
   formatDate(data) {
@@ -115,7 +113,7 @@ class Details extends Component {
     return (
       <React.Fragment>
         <div className="details">
-          <Header/>
+          <Header showBookShowButton={true}/>
 
           {/* back button */}
           <div className="back">

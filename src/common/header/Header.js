@@ -1,5 +1,6 @@
 /* react imports */
 import React, {Component} from "react";
+import ReactDOM from "react-dom";
 import Modal from "react-modal";
 import PropTypes from "prop-types";
 
@@ -17,6 +18,7 @@ import FormHelpertext from "@material-ui/core/FormHelperText";
 /* project imports */
 import logo from "../../assets/logo.svg";
 import "./Header.css";
+import BookShow from "../../screens/bookshow/BookShow.js";
 
 const TabContainer = (props) => {
   return (
@@ -90,6 +92,10 @@ class Header extends Component {
     this.setState(updatedState);
   };
 
+  bookShowHandler() {
+    ReactDOM.render(<BookShow/>, document.getElementById("root"));
+  };
+
   render() {
 		const appLoginModalCustomStyles = {
 			content: {
@@ -111,6 +117,12 @@ class Header extends Component {
         <div className="appHeaderBar row">
           <img src={logo} className="app-logo"/>
           <div className="login-button">
+            {
+              ("showBookShowButton" in this.props) && (this.props.showBookShowButton === true) &&
+              (<Button style={{marginRight: "15px"}} variant="contained" color="primary" onClick={this.bookShowHandler.bind(this)}>
+                Book Show
+              </Button>)
+            }
             <Button variant="contained" color="default" onClick={this.openModalHandler.bind(this)}>
               Login
             </Button>
